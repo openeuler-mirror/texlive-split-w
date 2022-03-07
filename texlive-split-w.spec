@@ -5,7 +5,7 @@
 
 Name:           texlive-split-w
 Version:        %{tl_version}
-Release:        24
+Release:        25
 Epoch:          8
 Summary:        TeX formatting system
 License:        Artistic 2.0 and GPLv2 and GPLv2+ and LGPLv2+ and LPPL and MIT and Public Domain and UCD and Utopia
@@ -908,17 +908,17 @@ support.
 
 %post -n texlive-t2
 if [ $1 -gt 0 ] ; then
-sed -i 's/^\#\!\ cyramstex.*$/cyramstex pdftex language.dat -translate-file=cp227.tcx *cyramstx.ini/' %{_texdir}/texmf-dist/web2c/fmtutil.cnf
-sed -i 's/^\#\!\ cyrtex.*$/cyrtex pdftex language.dat -translate-file=cp227.tcx *cyrtex.ini/' %{_texdir}/texmf-dist/web2c/fmtutil.cnf
-sed -i 's/^\#\!\ cyrtexinfo.*$/cyrtexinfo pdftex language.dat -translate-file=cp227.tcx *cyrtxinf.ini/' %{_texdir}/texmf-dist/web2c/fmtutil.cnf
+sed -i 's/^\#\!\ cyramstex.*$/cyramstex pdftex language.dat -translate-file=cp227.tcx *cyramstx.ini/' /etc/texlive/web2c/fmtutil.cnf
+sed -i 's/^\#\!\ cyrtex.*$/cyrtex pdftex language.dat -translate-file=cp227.tcx *cyrtex.ini/' /etc/texlive/web2c/fmtutil.cnf
+sed -i 's/^\#\!\ cyrtexinfo.*$/cyrtexinfo pdftex language.dat -translate-file=cp227.tcx *cyrtxinf.ini/' /etc/texlive/web2c/fmtutil.cnf
 fi
 :
 
 %postun -n texlive-t2
 if [ $1 == 0 ] ; then
-sed -i 's/^cyramstex.*$/\#\!\ cyramstex pdftex language.dat -translate-file=cp227.tcx *cyramstx.ini/' %{_texdir}/texmf-dist/web2c/fmtutil.cnf > /dev/null 2>&1
-sed -i 's/^cyrtex.*$/\#\!\ cyrtex pdftex language.dat -translate-file=cp227.tcx *cyrtex.ini/' %{_texdir}/texmf-dist/web2c/fmtutil.cnf > /dev/null 2>&1
-sed -i 's/^cyrtexinfo.*$/\#\!\ cyrtexinfo pdftex language.dat -translate-file=cp227.tcx *cyrtxinf.ini/' %{_texdir}/texmf-dist/web2c/fmtutil.cnf > /dev/null 2>&1
+sed -i 's/^cyramstex.*$/\#\!\ cyramstex pdftex language.dat -translate-file=cp227.tcx *cyramstx.ini/' /etc/texlive/web2c/fmtutil.cnf > /dev/null 2>&1
+sed -i 's/^cyrtex.*$/\#\!\ cyrtex pdftex language.dat -translate-file=cp227.tcx *cyrtex.ini/' /etc/texlive/web2c/fmtutil.cnf > /dev/null 2>&1
+sed -i 's/^cyrtexinfo.*$/\#\!\ cyrtexinfo pdftex language.dat -translate-file=cp227.tcx *cyrtxinf.ini/' /etc/texlive/web2c/fmtutil.cnf > /dev/null 2>&1
 fi
 :
 
@@ -3789,6 +3789,9 @@ rm -f %{buildroot}%{_datadir}/texlive/texmf-dist/tlpkg/tlpobj/*
 %doc %{_texdir}/texmf-dist/doc/latex/textualicomma/
 
 %changelog
+* Wed Mar 07 2022 xu_ping <xuping33@huawei.com> - 8:2018-25
+- Fix fmtutil.cnf not found
+
 * Wed May 19 2021 maminjie <maminjie1@huawei.com> - 8:2018-24
 - split texlive
 
